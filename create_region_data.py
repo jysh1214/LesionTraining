@@ -67,8 +67,30 @@ if __name__ == '__main__':
             json_content += '}'
             json_content += '}'
 
-            json_file = open(path + ".json", "a")
+            json_path = path[:-2] + "json"
+            json_file = open(json_path + ".json", "a")
             json_file.write(json_content)
             json_file.close()
 
     # create json file
+    train_json_file = open("Lesion/train/via_region_data.json", "a")
+    train_json_file.write("{")
+    for path in glob.glob("Lesion/train_bw/*.json"):
+        json_file = open(path, "r")
+        contenet = json_file.read()
+        train_json_file.write(contenet)
+        train_json_file.write(",")
+
+    train_json_file.write("}")
+    train_json_file.close()
+
+    train_json_file = open("Lesion/val/via_region_data.json", "a")
+    train_json_file.write("{")
+    for path in glob.glob("Lesion/val_bw/*.json"):
+        json_file = open(path, "r")
+        contenet = json_file.read()
+        train_json_file.write(contenet)
+        train_json_file.write(",")
+
+    train_json_file.write("}")
+    train_json_file.close()
