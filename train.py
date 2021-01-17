@@ -5,7 +5,7 @@ from detectron2 import model_zoo
 from detectron2.engine import DefaultTrainer
 from detectron2.utils.visualizer import Visualizer
 from detectron2.data import MetadataCatalog, DatasetCatalog
-from loader import get_balloon_dicts
+from loader import get_lesion_dicts
 
 if __name__ == "__main__":
     # Register balloon dataset

@@ -54,9 +54,9 @@ def verify_dataloader():
         DatasetCatalog.register("lesion_" + d, lambda d=d: get_balloon_dicts("Lesion/" + d))
         MetadataCatalog.get("lesion_" + d).set(thing_classes=["lesion"])
 
-    balloon_metadata = MetadataCatalog.get("lesion_train")
+    lesion_metadata = MetadataCatalog.get("lesion_train")
 
-    dataset_dicts = get_balloon_dicts("Lesion/train")
+    dataset_dicts = get_lesion_dicts("Lesion/train")
 
     random.seed(1)
     for d in random.sample(dataset_dicts, 3):

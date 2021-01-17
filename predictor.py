@@ -7,7 +7,7 @@ import os
 from detectron2.engine.defaults import DefaultPredictor
 from detectron2.utils.visualizer import ColorMode
 
-balloon_metadata = MetadataCatalog.get("balloon_train")
+balloon_metadata = MetadataCatalog.get("lesion_train")
 
 if __name__ == "__main__":
     cfg = get_cfg()
