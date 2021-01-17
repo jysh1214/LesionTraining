@@ -1,5 +1,26 @@
 import numpy as np
 
+"""
+只保留向量兩端
+"""
+def reduce_point(array):
+    if len(array) < 3:
+        return array
+
+    i = 2
+    while (True):
+        if (array[i-2][0] == array[i-1][0] == array[i][0] or array[i-2][1] == array[i-1][1] == array[i][1]):
+            # array.pop(i-1)
+            array = array[:i-1] + array[i:]
+        else:
+            i = i + 1
+
+        if (i == len(array)):
+            break
+
+    return array
+
+
 def region_point(image, size):
     # print(image.size)
     # print(size[0])
@@ -207,5 +228,5 @@ def region_point(image, size):
         else:
             break
 
-
-    print(startp)
+    new = reduce_point(all_points)
+    print(new)
