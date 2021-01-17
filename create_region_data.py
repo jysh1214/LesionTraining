@@ -26,13 +26,13 @@ def list2str(l):
 
 if __name__ == '__main__':
     # convert to jpg
-    for f in ["train", "train_bw", "val", "val_bw"]:
-        for path in glob.glob(DATA + f + "/*"):
-            filename = strproc(path, "/")
-            format = strproc(path, ".")
-            if (format != "jpg"):
-                image = Image.open(path)
-                image.save(path.replace(format, "jpg"))
+    # for f in ["train", "train_bw", "val", "val_bw"]:
+    #     for path in glob.glob(DATA + f + "/*"):
+    #         filename = strproc(path, "/")
+    #         format = strproc(path, ".")
+    #         if (format != "jpg"):
+    #             image = Image.open(path)
+    #             image.save(path.replace(format, "jpg"))
 
     # get edge
     for f in ["train_bw", "val_bw"]:
@@ -48,6 +48,7 @@ if __name__ == '__main__':
                 all_points_x.append(point[0])
                 all_points_y.append(point[1])
 
+            filename = strproc(path, "/")
             json_content = ""
             json_content += '"' + filename + str(image.size) + '"' + ':{'
             json_content += '"fileref":"",'
@@ -67,13 +68,13 @@ if __name__ == '__main__':
             json_content += '}'
             json_content += '}'
 
-            json_path = path[:-2] + "json"
-            json_file = open(json_path + ".json", "a")
+            json_path = DATA + f[:-2] + "json/"
+            json_file = open(json_path + filename + ".json", 'a')
             json_file.write(json_content)
             json_file.close()
 
     # create json file
-    train_json_file = open("Lesion/train/via_region_data.json", "a")
+    train_json_file = open("Lesion/train/via_region_data.json", 'a')
     train_json_file.write("{")
     for path in glob.glob("Lesion/train_bw/*.json"):
         json_file = open(path, "r")
@@ -84,7 +85,7 @@ if __name__ == '__main__':
     train_json_file.write("}")
     train_json_file.close()
 
-    train_json_file = open("Lesion/val/via_region_data.json", "a")
+    train_json_file = open("Lesion/val/via_region_data.json", 'a')
     train_json_file.write("{")
     for path in glob.glob("Lesion/val_bw/*.json"):
         json_file = open(path, "r")
