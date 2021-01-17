@@ -10,8 +10,7 @@ def reduce_point(array):
     i = 2
     while (True):
         if (array[i-2][0] == array[i-1][0] == array[i][0] or array[i-2][1] == array[i-1][1] == array[i][1]):
-            # array.pop(i-1)
-            array = array[:i-1] + array[i:]
+            array.pop(i-1)
         else:
             i = i + 1
 
@@ -52,7 +51,6 @@ def region_point(image, size):
             j = j - 1
             if ((j, i) == startp):
                 break
-            print("Current Point: ", j, i)
             continue
         elif (data[i+1, j-1] == True):
             all_points.append((j, i))
@@ -60,14 +58,12 @@ def region_point(image, size):
             i = i + 1
             if ((j, i) == startp):
                 break
-            print("Current Point: ", j, i)
             continue
         elif (data[i+1, j] == True):
             all_points.append((j, i))
             i = i + 1
             if ((j, i) == startp):
                 break
-            print("Current Point: ", j, i)
             continue
         elif (data[i+1, j+1] == True):
             all_points.append((j, i))
@@ -75,14 +71,12 @@ def region_point(image, size):
             i = i + 1
             if ((j, i) == startp):
                 break
-            print("Current Point: ", j, i)
             continue
         elif (data[i, j+1] == True):
             all_points.append((j, i))
             j = j + 1
             if ((j, i) == startp):
                 break
-            print("Current Point: ", j, i)
             down = True
             continue
         elif ((j, i) in all_points):
@@ -98,7 +92,6 @@ def region_point(image, size):
             i = i + 1
             if ((j, i) == startp):
                 break
-            print("Current Point: ", j, i)
             continue
         elif (data[i+1, j+1] == True):
             all_points.append((j, i))
@@ -106,14 +99,12 @@ def region_point(image, size):
             j = j + 1
             if ((j, i) == startp):
                 break
-            print("Current Point: ", j, i)
             continue
         elif (data[i, j+1] == True):
             all_points.append((j, i))
             j = j + 1
             if ((j, i) == startp):
                 break
-            print("Current Point: ", j, i)
             continue
         elif (data[i-1, j+1] == True):
             all_points.append((j, i))
@@ -121,14 +112,12 @@ def region_point(image, size):
             i = i - 1
             if ((j, i) == startp):
                 break
-            print("Current Point: ", j, i)
             continue
         elif (data[i-1, j] == True):
             all_points.append((j, i))
             i = i - 1
             if ((j, i) == startp):
                 break
-            print("Current Point: ", j, i)
             left = True
             continue
         elif ((j, i) in all_points):
@@ -144,7 +133,6 @@ def region_point(image, size):
             j = j + 1
             if ((j, i) == startp):
                 break
-            print("Current Point: ", j, i)
             continue
         elif (data[i-1, j+1] == True):
             all_points.append((j, i))
@@ -152,14 +140,12 @@ def region_point(image, size):
             i = i - 1
             if ((j, i) == startp):
                 break
-            print("Current Point: ", j, i)
             continue
         elif (data[i-1, j] == True):
             all_points.append((j, i))
             i = i - 1
             if ((j, i) == startp):
                 break
-            print("Current Point: ", j, i)
             continue
         elif (data[i-1, j-1] == True):
             all_points.append((j, i))
@@ -167,14 +153,12 @@ def region_point(image, size):
             i = i - 1
             if ((j, i) == startp):
                 break
-            print("Current Point: ", j, i)
             continue
         elif (data[i, j-1] == True):
             all_points.append((j, i))
             j = j - 1
             if ((j, i) == startp):
                 break
-            print("Current Point: ", j, i)
             up = True
             continue
         elif ((j, i) in all_points):
@@ -190,7 +174,6 @@ def region_point(image, size):
                 break
             all_points.append((j, i))
             i = i - 1
-            print("Current Point: ", j, i)
             continue
         elif (data[i-1, j-1] == True):
             all_points.append((j, i))
@@ -198,14 +181,12 @@ def region_point(image, size):
             i = i - 1
             if ((j, i) == startp):
                 break
-            print("Current Point: ", j, i)
             continue
         elif (data[i, j-1] == True):
             all_points.append((j, i))
             j = j - 1
             if ((j, i) == startp):
                 break
-            print("Current Point: ", j, i)
             continue
         elif (data[i+1, j-1] == True):
             all_points.append((j, i))
@@ -213,14 +194,12 @@ def region_point(image, size):
             i = i + 1
             if ((j, i) == startp):
                 break
-            print("Current Point: ", j, i)
             continue
         elif (data[i+1, j] == True):
             all_points.append((j, i))
             i = i + 1
             if ((j, i) == startp):
                 break
-            print("Current Point: ", j, i)
             right = True
             continue
         elif ((j, i) in all_points):
@@ -229,4 +208,6 @@ def region_point(image, size):
             break
 
     new = reduce_point(all_points)
-    print(new)
+    new.append(startp)
+
+    return new

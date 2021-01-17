@@ -14,6 +14,16 @@ def strproc(path, char):
             return path[i+1:]
 
 
+def list2str(l):
+    liststr = '['
+    for item in l:
+        liststr += str(item) + ','
+    liststr = liststr[:-1]
+    liststr += ']'
+
+    return liststr
+
+
 if __name__ == '__main__':
     # convert to jpg
     for f in ["train", "train_bw", "val", "val_bw"]:
@@ -30,4 +40,35 @@ if __name__ == '__main__':
             image = plt.imread(path)
             edge = feature.canny(image)
             size = Image.open(path).size
-            region_point(edge, size)
+            all_points = region_point(edge, size)
+            all_points_x = []
+            all_points_y = []
+
+            for point in all_points:
+                all_points_x.append(point[0])
+                all_points_y.append(point[1])
+
+            json_content = ""
+            json_content += '"' + filename + str(image.size) + '"' + ':{'
+            json_content += '"fileref":"",'
+            json_content += '"size":' + str(image.size) + ','
+            json_content += '"filename":' + '"' + filename + '",'
+            json_content += '"base64_img_data":"",'
+            json_content += '"file_attributes":{},'
+            json_content += '"regions":{'
+            json_content += '"0":{'
+            json_content += '"shape_attributes":{'
+            json_content += '"name":"polygon",'
+            json_content += '"all_points_x":' + list2str(all_points_x) + ','
+            json_content += '"all_points_y":' + list2str(all_points_x)
+            json_content += '},'
+            json_content += '"region_attributes":{}'
+            json_content += '}'
+            json_content += '}'
+            json_content += '}'
+
+            json_file = open(path + ".json", "a")
+            json_file.write(json_content)
+            json_file.close()
+
+    # create json file
