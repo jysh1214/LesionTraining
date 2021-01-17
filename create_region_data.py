@@ -49,6 +49,8 @@ if __name__ == '__main__':
                 all_points_y.append(point[1])
 
             filename = strproc(path, "/")
+            filename = filename[:-7] # remove '_bw.jpg'
+            filename += ".jpg"
             json_content = ""
             json_content += '"' + filename + str(image.size) + '"' + ':{'
             json_content += '"fileref":"",'
