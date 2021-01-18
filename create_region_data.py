@@ -1,3 +1,5 @@
+import os
+import subprocess
 import glob
 from PIL import Image
 from skimage import feature
@@ -33,6 +35,11 @@ if __name__ == '__main__':
     #         if (format != "jpg"):
     #             image = Image.open(path)
     #             image.save(path.replace(format, "jpg"))
+
+    # rm all json file
+    for f in ["train", "train_json", "val", "val_json"]:
+        command = ("rm Lesion/{0}/*.json" .format(f))
+        subprocess.call(command, shell=True)
 
     # get edge
     for f in ["train_bw", "val_bw"]:
@@ -78,22 +85,32 @@ if __name__ == '__main__':
     # create json file
     train_json_file = open("Lesion/train/via_region_data.json", 'a')
     train_json_file.write("{")
+    train_json_file_content = ""
     for path in glob.glob("Lesion/train_json/*.json"):
         json_file = open(path, "r")
         contenet = json_file.read()
-        train_json_file.write(contenet)
-        train_json_file.write(",")
+        # train_json_file.write(contenet)
+        # train_json_file.write(",")
+        train_json_file_content += contenet
+        train_json_file_content += ","
 
+    train_json_file_content = train_json_file_content[:-1] # remove ','
+    train_json_file.write(train_json_file_content)
     train_json_file.write("}")
     train_json_file.close()
 
-    train_json_file = open("Lesion/val/via_region_data.json", 'a')
-    train_json_file.write("{")
+    val_json_file = open("Lesion/val/via_region_data.json", 'a')
+    val_json_file.write("{")
+    val_json_file_content = ""
     for path in glob.glob("Lesion/val_json/*.json"):
         json_file = open(path, "r")
-        contenet = json_file.read()
-        train_json_file.write(contenet)
-        train_json_file.write(",")
+        content = json_file.read()
+        # val_json_file.write(contenet)
+        # val_json_file.write(",")
+        val_json_file_content += content
+        val_json_file_content += ","
 
-    train_json_file.write("}")
-    train_json_file.close()
+    val_json_file_content = val_json_file_content[:-1] # remove ','
+    val_json_file.write(val_json_file_content)
+    val_json_file.write("}")
+    val_json_file.close()

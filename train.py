@@ -10,8 +10,8 @@ from loader import get_lesion_dicts
 if __name__ == "__main__":
     # Register balloon dataset
     for d in ["train", "val"]:
-        DatasetCatalog.register("Lesion_" + d, lambda d=d: get_balloon_dicts("lesion/" + d))
-        MetadataCatalog.get("Lesion_" + d).set(thing_classes=["lesion"])
+        DatasetCatalog.register("lesion_" + d, lambda d=d: get_lesion_dicts("lesion/" + d))
+        MetadataCatalog.get("lesion_" + d).set(thing_classes=["lesion"])
     balloon_metadata = MetadataCatalog.get("lesion_train")
 
     # Model configuration
